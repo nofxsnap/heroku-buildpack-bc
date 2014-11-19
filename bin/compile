@@ -7,8 +7,12 @@ FLEX_INSTALL_DIR=$BUILD_DIR/vendor/flex/
 FLEX_DIR=${HOME}/vendor/flex
 FLEX_ENVSCRIPT=$BUILD_DIR/.profile.d/flex.sh
 
-BC_REMOTE=http://ftp.gnu.org/gnu/bc/bc-1.06.tar.gz
+BC_VERSION=1.06
+BC_REMOTE=http://ftp.gnu.org/gnu/bc/bc-$BC_VERSION.tar.gz
 BC_INSTALL_DIR=$BUILD_DIR/vendor/bc/
+BC_DIR=${HOME}/vendor/bc
+BC_ENVSCRIPT=$BUILD_DIR/.profile.d/bc.sh
+
 
 echo "Getting flex binaries from $FLEX_REMOTE..."
 mkdir -p $FLEX_INSTALL_DIR
@@ -22,3 +26,7 @@ echo "export PATH=\"$FLEX_DIR/flex-$FLEX_VERSION:\$PATH\"" > $FLEX_ENVSCRIPT
 echo "Getting bc binaries from $BC_REMOTE..."
 mkdir -p $BC_INSTALL_DIR
 curl $BC_REMOTE -o - | tar -xz -C $BC_INSTALL_DIR -f -
+cd $BC_INSTALL_DIR/bc-$BC_VERSION
+./configure
+DESTDIR=/app make install
+echo "export PATH=\"$BC_DIR/bc-$BC_VERSION:\$PATH\"" > $BC_ENVSCRIPT
