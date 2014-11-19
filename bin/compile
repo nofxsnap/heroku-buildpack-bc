@@ -1,9 +1,23 @@
 #!/bin/bash
 BUILD_DIR=$1
 
+FLEX_VERSION=2.5.39
+FLEX_REMOTE=http://sourceforge.net/projects/flex/files/flex-$FLEX_VERSION.tar.gz/download
+FLEX_INSTALL_DIR=$BUILD_DIR/vendor/flex/
+FLEX_ENVSCRIPT=$BUILD_DIR/.profile.d/flex.sh
+
 BC_REMOTE=http://ftp.gnu.org/gnu/bc/bc-1.06.tar.gz
-INSTALL_DIR=$BUILD_DIR/vendor/bc/
+BC_INSTALL_DIR=$BUILD_DIR/vendor/bc/
+
+echo "Getting flex binaries from $FLEX_REMOTE..."
+mkdir -p $FLEX_INSTALL_DIR
+curl -L $FLEX_REMOTE -o - | tar -xz -C $FLEX_INSTALL_DIR -f -
+cd $FLEX_INSTALL_DIR/flex-$FLEX_VERSION
+./configure
+DESTDIR=/app make install
+echo "export PATH=\"$FLEX_INSTALL_DIR/flex-$FLEX_VERSION:\$PATH\"" > $FLEX_ENVSCRIPT
+
 
 echo "Getting bc binaries from $BC_REMOTE..."
-mkdir -p $INSTALL_DIR
-curl $BC_REMOTE -o - | tar -xz -C $INSTALL_DIR -f -
+mkdir -p $BC_INSTALL_DIR
+curl $BC_REMOTE -o - | tar -xz -C $BC_INSTALL_DIR -f -
