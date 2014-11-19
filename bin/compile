@@ -1,1 +1,9 @@
 #!/bin/bash
+BUILD_DIR=$1
+
+BC_REMOTE=http://ftp.gnu.org/gnu/bc/bc-1.06.tar.gz
+INSTALL_DIR=$BUILD_DIR/vendor/bc/
+
+echo "Getting bc binaries from $BC_REMOTE..."
+mkdir -p $INSTALL_DIR
+curl $BC_REMOTE -o - | tar -xz -C $INSTALL_DIR -f -
