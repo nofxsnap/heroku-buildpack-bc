@@ -1,4 +1,4 @@
-# Heroku Buildpack - Tesseract
+# Heroku Buildpack - bc
 
 Added the libraries to use [bc](http://www.gnu.org/software/bc/) 1.0.6 on Heroku.
 
