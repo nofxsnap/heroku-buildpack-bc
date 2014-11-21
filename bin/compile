@@ -21,7 +21,7 @@ cd $FLEX_INSTALL_DIR/flex-$FLEX_VERSION
 ./configure
 DESTDIR=/app make install
 echo "export PATH=\"$FLEX_DIR/flex-$FLEX_VERSION:\$PATH\"" > $FLEX_ENVSCRIPT
-. $FLEX_ENVSCRIPT
+ln -s $FLEX_DIR/flex-$FLEX_VERSION/flex /app/bin/flex
 
 
 echo "Getting bc binaries from $BC_REMOTE..."
