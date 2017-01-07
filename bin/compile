@@ -2,7 +2,7 @@
 BUILD_DIR=$1
 
 BC_VERSION=1.06
-BC_REMOTE=https://github.com/Helabs/heroku-buildpack-bc/raw/master/bc.tar.gz
+BC_REMOTE=https://github.com/nofxsnap/heroku-buildpack-bc/raw/master/bc.tar.gz
 BC_INSTALL_DIR=$BUILD_DIR/vendor/bc/
 BC_DIR=${HOME}/vendor/bc
 BC_ENVSCRIPT=$BUILD_DIR/.profile.d/bc.sh
