@@ -1,27 +1,11 @@
 #!/bin/bash
 BUILD_DIR=$1
 
-FLEX_VERSION=2.5.39
-FLEX_REMOTE=http://sourceforge.net/projects/flex/files/flex-$FLEX_VERSION.tar.gz/download
-FLEX_INSTALL_DIR=$BUILD_DIR/vendor/flex/
-FLEX_DIR=${HOME}/vendor/flex
-FLEX_ENVSCRIPT=$BUILD_DIR/.profile.d/flex.sh
-
 BC_VERSION=1.06
 BC_REMOTE=https://github.com/Helabs/heroku-buildpack-bc/raw/master/bc.tar.gz
 BC_INSTALL_DIR=$BUILD_DIR/vendor/bc/
 BC_DIR=${HOME}/vendor/bc
 BC_ENVSCRIPT=$BUILD_DIR/.profile.d/bc.sh
-
-
-echo "Getting flex binaries from $FLEX_REMOTE..."
-mkdir -p $FLEX_INSTALL_DIR
-curl -L $FLEX_REMOTE -o - | tar -xz -C $FLEX_INSTALL_DIR -f -
-cd $FLEX_INSTALL_DIR/flex-$FLEX_VERSION
-./configure
-DESTDIR=/app make install
-echo "export PATH=\"$FLEX_DIR/flex-$FLEX_VERSION:\$PATH\"" > $FLEX_ENVSCRIPT
-
 
 echo "Getting bc binaries from $BC_REMOTE..."
 mkdir -p $BC_INSTALL_DIR
